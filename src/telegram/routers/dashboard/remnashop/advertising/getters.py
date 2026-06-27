@@ -5,11 +5,12 @@ from aiogram_dialog import DialogManager
 from dishka import FromDishka
 from dishka.integrations.aiogram_dialog import inject
 
-from src.application.common import BotService
+from src.application.common import BotService, TranslatorRunner
 from src.application.dto import AdLinkDto
 from src.application.use_cases.ad_link.queries.list import GetAdLinks
 from src.application.use_cases.ad_link.queries.stats import GetAdLinkStats
 from src.core.constants import USER_KEY
+from dishka import FromDishka
 
 
 @inject
@@ -77,6 +78,7 @@ async def stats_getter(
     dialog_manager: DialogManager,
     get_stats: FromDishka[GetAdLinkStats],
     retort: FromDishka[Retort],
+    i18n: FromDishka[TranslatorRunner],
     **kwargs: Any,
 ) -> dict[str, Any]:
     user = dialog_manager.middleware_data[USER_KEY]
@@ -86,10 +88,10 @@ async def stats_getter(
 
     revenue_lines = (
         "\n".join(
-            f"• <b>Доход ({currency})</b>: {amount:.2f}"
+            i18n.get("frg-ad-link-revenue-line", currency=currency, amount=f"{amount:.2f}")
             for currency, amount in stats.revenue.items()
         )
-        or "• <b>Доход</b>: —"
+        or i18n.get("frg-ad-link-revenue-empty")
     )
 
     return {
