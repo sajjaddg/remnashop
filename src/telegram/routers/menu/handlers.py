@@ -1,5 +1,9 @@
+import base64
+
+import httpx
 from adaptix import Retort
 from aiogram import F, Router
+from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
 from aiogram_dialog import DialogManager, ShowMode, StartMode
@@ -352,3 +356,56 @@ async def on_reset_referral_code(
         )
         return
     await notifier.notify_user(user=user, i18n_key="ntf-invite.referral-reset")
+
+
+@inject
+async def on_get_links(
+    callback: CallbackQuery,
+    widget: Button,
+    dialog_manager: DialogManager,
+    subscription_dao: FromDishka[SubscriptionDao],
+    i18n: FromDishka[TranslatorRunner],
+) -> None:
+    user: TelegramUserDto = dialog_manager.middleware_data[USER_KEY]
+    subscription = await subscription_dao.get_current(user.id)
+
+    if not subscription or not subscription.url:
+        await callback.answer(
+            text=i18n.get("ntf-user.subscription-empty"),
+            show_alert=True,
+        )
+        return
+
+    await callback.answer()
+
+    try:
+        async with httpx.AsyncClient(timeout=30, follow_redirects=True) as client:
+            response = await client.get(subscription.url)
+            response.raise_for_status()
+
+        raw_text = response.text.strip()
+
+        try:
+            decoded = base64.b64decode(raw_text).decode("utf-8")
+        except Exception:
+            decoded = raw_text
+
+        # Telegram message limit is 4096 chars
+        if len(decoded) > 4000:
+            decoded = decoded[:4000] + "\n\n... (truncated)"
+
+        await callback.message.answer(
+            text=f"<pre>{decoded}</pre>",
+            parse_mode=ParseMode.HTML,
+        )
+
+    except httpx.HTTPStatusError as e:
+        logger.error(f"{user.log} Get links HTTP error: {e.response.status_code}")
+        await callback.message.answer(
+            text=i18n.get("ntf-subscription.payment-creation-failed"),
+        )
+    except Exception as e:
+        logger.error(f"{user.log} Get links failed: {e}")
+        await callback.message.answer(
+            text=i18n.get("ntf-error.unknown"),
+        )

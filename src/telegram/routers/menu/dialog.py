@@ -37,6 +37,7 @@ from .handlers import (
     on_device_delete_all_confirm,
     on_device_delete_confirm,
     on_device_delete_request,
+    on_get_links,
     on_get_trial,
     on_invite,
     on_reissue_subscription_confirm,
@@ -57,6 +58,15 @@ menu = Window(
     Banner(BannerName.MENU),
     I18nFormat("msg-main-menu"),
     *connect_buttons,
+    Row(
+        Button(
+            text=I18nFormat("btn-menu.get-links"),
+            id="get_links",
+            on_click=on_get_links,
+            style=Style(ButtonStyle.PRIMARY),
+        ),
+        when=F["has_subscription"] & F["connectable"],
+    ),
     Row(
         Button(
             text=I18nFormat("btn-menu.connect-not-available"),
