@@ -79,6 +79,7 @@ async def configurator_getter(
                         PlanPriceDto(currency=Currency.USD, price=Decimal(0.5)),
                         PlanPriceDto(currency=Currency.XTR, price=Decimal(30)),
                         PlanPriceDto(currency=Currency.RUB, price=Decimal(50)),
+                        PlanPriceDto(currency=Currency.IRR, price=Decimal(25000)),
                     ],
                 ),
                 PlanDurationDto(
@@ -87,6 +88,7 @@ async def configurator_getter(
                         PlanPriceDto(currency=Currency.USD, price=Decimal(1)),
                         PlanPriceDto(currency=Currency.XTR, price=Decimal(60)),
                         PlanPriceDto(currency=Currency.RUB, price=Decimal(100)),
+                        PlanPriceDto(currency=Currency.IRR, price=Decimal(50000)),
                     ],
                 ),
                 PlanDurationDto(
@@ -95,6 +97,7 @@ async def configurator_getter(
                         PlanPriceDto(currency=Currency.USD, price=Decimal(10)),
                         PlanPriceDto(currency=Currency.XTR, price=Decimal(600)),
                         PlanPriceDto(currency=Currency.RUB, price=Decimal(1000)),
+                        PlanPriceDto(currency=Currency.IRR, price=Decimal(500000)),
                     ],
                 ),
                 PlanDurationDto(
@@ -103,6 +106,7 @@ async def configurator_getter(
                         PlanPriceDto(currency=Currency.USD, price=Decimal(100)),
                         PlanPriceDto(currency=Currency.XTR, price=Decimal(6000)),
                         PlanPriceDto(currency=Currency.RUB, price=Decimal(10000)),
+                        PlanPriceDto(currency=Currency.IRR, price=Decimal(5000000)),
                     ],
                 ),
             ],
