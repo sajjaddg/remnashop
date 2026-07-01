@@ -1095,10 +1095,65 @@ msg-gateways-placement = <b>🔢 Change Placement</b>
 msg-gateways-field =
     <b>🌐 { gateway-type } Configuration</b>
 
-    Enter a new value for { $field ->
-        [display_name] the display name
+    Enter a new value for { $field ->\n        [display_name] the display name
+        [card_number] the card number
+        [card_holder_name] the card holder name
+        [bank_name] the bank name
+        [instructions] the payment instructions
        *[other] { $field }
     }.
+
+# Card-to-Card Payment
+msg-card-to-card-info =
+    <b>💳 Card-to-Card Payment</b>
+
+    <blockquote>
+    • <b>Amount</b>: { $amount } { $currency }
+    • <b>Card Number</b>: <code>{ $card_number }</code>
+    • <b>Card Holder</b>: { $card_holder_name }
+    • <b>Bank</b>: { $bank_name }
+    </blockquote>
+
+    { $instructions }
+
+    <b>⬆️ Please transfer the exact amount and send a screenshot of the payment receipt.</b>
+
+msg-card-to-card-receipt-received =
+    ✅ Receipt received! Your payment is now pending admin approval.
+
+    You will be notified once the payment is verified.
+
+msg-card-to-card-payment-approved =
+    ✅ <b>Payment Approved!</b>
+
+    Your payment has been verified and your subscription is now active.
+
+msg-card-to-card-payment-rejected =
+    ❌ <b>Payment Rejected</b>
+
+    { $admin_notes ->\n        [NO_NOTES] Your payment receipt was not approved. Please contact support.
+       *[HAS_NOTES] Reason: { $admin_notes }
+    }
+
+msg-card-to-card-pending-payments =
+    <b>💳 Pending Card-to-Card Payments</b>
+
+    { $count ->\n        [0] No pending payments.
+        [one] { $count } payment awaiting review.
+       *[other] { $count } payments awaiting review.
+    }
+
+msg-card-to-card-payment-details =
+    <b>💳 Payment Review</b>
+
+    <blockquote>
+    • <b>User</b>: { $user_name } (ID: { $user_id })
+    • <b>Amount</b>: { $amount } { $currency }
+    • <b>Plan</b>: { $plan_name }
+    • <b>Duration</b>: { $duration } days
+    • <b>Status</b>: ⏳ Pending
+    • <b>Date</b>: { $created_at }
+    </blockquote>
 
 
 # Referral

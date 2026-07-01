@@ -96,6 +96,7 @@ class PaymentGatewayType(UpperStrEnum):
     ROBOKASSA = auto()
     URLPAY = auto()
     WATA = auto()
+    CARD_TO_CARD = auto()  # Manual card-to-card transfer with receipt upload
 
 
 class PurchaseType(UpperStrEnum):
@@ -292,6 +293,7 @@ class Currency(UpperStrEnum):
     USD = auto()
     XTR = auto()
     RUB = auto()
+    IRR = auto()  # Iranian Toman
 
     @property
     def symbol(self) -> str:
@@ -299,6 +301,7 @@ class Currency(UpperStrEnum):
             self.USD: "$",
             self.XTR: "★",
             self.RUB: "₽",
+            self.IRR: "﷼",
         }
         return symbols.get(self, "?")
 
@@ -323,6 +326,7 @@ class Currency(UpperStrEnum):
             PaymentGatewayType.URLPAY: cls.RUB,
             PaymentGatewayType.WATA: cls.RUB,
             PaymentGatewayType.VALUTIX: cls.RUB,
+            PaymentGatewayType.CARD_TO_CARD: cls.IRR,
         }
 
         try:

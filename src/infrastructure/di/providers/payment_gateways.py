@@ -11,6 +11,7 @@ from src.core.config import AppConfig
 from src.core.enums import PaymentGatewayType
 from src.infrastructure.payment_gateways import (
     BasePaymentGateway,
+    CardToCardGateway,
     CryptomusGateway,
     CryptoPayGateway,
     FreeKassaGateway,
@@ -43,6 +44,7 @@ GATEWAY_MAP: dict[PaymentGatewayType, Type[BasePaymentGateway]] = {
     PaymentGatewayType.URLPAY: UrlPayGateway,
     PaymentGatewayType.VALUTIX: ValutixGateway,
     PaymentGatewayType.WATA: WataGateway,
+    PaymentGatewayType.CARD_TO_CARD: CardToCardGateway,
 }
 
 

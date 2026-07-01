@@ -314,6 +314,7 @@ async def getter_connect(
         "connection_url": config.bot.mini_app_url or current_subscription.url,
         "subscription_url": current_subscription.url,
         "connectable": True,
+        "has_subscription": True,
     }
 
 
@@ -348,4 +349,5 @@ async def success_payment_getter(
         "connection_url": config.bot.mini_app_url or subscription.url,
         "subscription_url": subscription.url,
         "connectable": True,
+        "has_subscription": True,
     }

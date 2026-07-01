@@ -98,6 +98,14 @@ btn-dashboard =
     .remnawave = 🌊 RemnaWave
     .remnashop = 🛍 RemnaShop
     .transactions = 🧾 Transactions
+    .pending-payments = 💳 Pending Payments ({ $count })
+
+btn-card-to-card =
+    .upload-receipt = 📤 Upload Receipt
+    .approve-payment = ✅ Approve Payment
+    .reject-payment = ❌ Reject Payment
+    .view-receipt = 🖼 View Receipt
+    .add-notes = 📝 Add Notes
     .importer = 📥 Import Users
 
 btn-statistics =

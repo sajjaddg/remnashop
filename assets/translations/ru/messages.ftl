@@ -1096,8 +1096,67 @@ msg-gateways-field =
 
     Введите новое значение для { $field ->
         [display_name] отображаемого названия
+        [card_number] номера карты
+        [card_holder_name] имени держателя карты
+        [bank_name] названия банка
+        [instructions] инструкций по оплате
        *[other] { $field }
     }.
+
+# Card-to-Card Payment
+msg-card-to-card-info =
+    <b>💳 Оплата с карты на карту</b>
+
+    <blockquote>
+    • <b>Сумма</b>: { $amount } { $currency }
+    • <b>Номер карты</b>: <code>{ $card_number }</code>
+    • <b>Держатель карты</b>: { $card_holder_name }
+    • <b>Банк</b>: { $bank_name }
+    </blockquote>
+
+    { $instructions }
+
+    <b>⬆️ Переведите точную сумму и отправьте скриншот чека об оплате.</b>
+
+msg-card-to-card-receipt-received =
+    ✅ Чек получен! Ваш платёж ожидает проверки администратором.
+
+    Вы получите уведомление после проверки платежа.
+
+msg-card-to-card-payment-approved =
+    ✅ <b>Платёж одобрен!</b>
+
+    Ваш платёж подтверждён, и ваша подписка активирована.
+
+msg-card-to-card-payment-rejected =
+    ❌ <b>Платёж отклонён</b>
+
+    { $admin_notes ->
+        [NO_NOTES] Ваш чек об оплате не был одобрен. Обратитесь в поддержку.
+       *[HAS_NOTES] Причина: { $admin_notes }
+    }
+
+msg-card-to-card-pending-payments =
+    <b>💳 Платежи в ожидании проверки</b>
+
+    { $count ->
+        [0] Нет платежей в ожидании.
+        [one] { $count } платёж ожидает проверки.
+        [few] { $count } платежа ожидают проверки.
+       *[more] { $count } платежей ожидают проверки.
+    }
+
+msg-card-to-card-payment-details =
+    <b>💳 Проверка платежа</b>
+
+    <blockquote>
+    • <b>Пользователь</b>: { $user_name } (ID: { $user_id })
+    • <b>Сумма</b>: { $amount } { $currency }
+    • <b>План</b>: { $plan_name }
+    • <b>Длительность</b>: { $duration } дней
+    • <b>Статус</b>: ⏳ Ожидает проверки
+    • <b>Дата</b>: { $created_at }
+    </blockquote>
 
 
 # Referral

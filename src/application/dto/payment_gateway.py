@@ -32,6 +32,7 @@ class PaymentGatewayDto(BaseDto, TrackableMixin):
             PaymentGatewayType.HELEKET,
             PaymentGatewayType.FREEKASSA,
             PaymentGatewayType.PAYMASTER,
+            PaymentGatewayType.CARD_TO_CARD,  # Manual approval, no webhook needed
         }
 
 
@@ -166,6 +167,15 @@ class ValutixGatewaySettingsDto(GatewaySettingsDto):
     api_key: Optional[SecretStr] = None
 
 
+@dataclass(kw_only=True)
+class CardToCardGatewaySettingsDto(GatewaySettingsDto):
+    type: Literal[PaymentGatewayType.CARD_TO_CARD] = PaymentGatewayType.CARD_TO_CARD
+    card_number: Optional[str] = None
+    card_holder_name: Optional[str] = None
+    bank_name: Optional[str] = None
+    instructions: Optional[str] = None  # Additional instructions for users
+
+
 AnyGatewaySettingsDto = Union[
     TelegramStarsGatewaySettingsDto,
     YooKassaGatewaySettingsDto,
@@ -181,4 +191,5 @@ AnyGatewaySettingsDto = Union[
     UrlPayGatewaySettingsDto,
     WataGatewaySettingsDto,
     ValutixGatewaySettingsDto,
+    CardToCardGatewaySettingsDto,
 ]

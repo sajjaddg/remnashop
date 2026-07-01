@@ -22,6 +22,7 @@ from .getters import (
     subscription_getter,
     success_payment_getter,
 )
+from ..menu.handlers import on_get_links
 from .handlers import (
     on_duration_select,
     on_get_subscription,
@@ -241,6 +242,15 @@ success_payment = Window(
     Banner(BannerName.SUBSCRIPTION),
     I18nFormat("msg-subscription-success"),
     *connect_buttons,
+    Row(
+        Button(
+            text=I18nFormat("btn-menu.get-links"),
+            id="get_links",
+            on_click=on_get_links,
+            style=Style(ButtonStyle.PRIMARY),
+        ),
+        when=F["has_subscription"] & F["connectable"],
+    ),
     *back_main_menu_button,
     IgnoreUpdate(),
     state=Subscription.SUCCESS,
@@ -251,6 +261,15 @@ success_trial = Window(
     Banner(BannerName.SUBSCRIPTION),
     I18nFormat("msg-subscription-trial"),
     *connect_buttons,
+    Row(
+        Button(
+            text=I18nFormat("btn-menu.get-links"),
+            id="get_links",
+            on_click=on_get_links,
+            style=Style(ButtonStyle.PRIMARY),
+        ),
+        when=F["has_subscription"] & F["connectable"],
+    ),
     *back_main_menu_button,
     IgnoreUpdate(),
     state=Subscription.TRIAL,

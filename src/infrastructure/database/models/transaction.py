@@ -34,4 +34,9 @@ class Transaction(BaseSql, TimestampMixin):
     currency: Mapped[Currency]
     plan_snapshot: Mapped[dict[str, Any]]
 
+    # Card-to-card payment fields
+    receipt_image: Mapped[Optional[str]]  # File ID or path to receipt image
+    admin_approval_status: Mapped[Optional[str]]  # PENDING, APPROVED, REJECTED
+    admin_notes: Mapped[Optional[str]]  # Admin's notes on approval/rejection
+
     user: Mapped["User"] = relationship(foreign_keys=[user_id])
