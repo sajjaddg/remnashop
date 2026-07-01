@@ -10,6 +10,12 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
+    # Add CARD_TO_CARD to payment_gateway_type enum
+    op.execute("ALTER TYPE payment_gateway_type ADD VALUE IF NOT EXISTS 'CARD_TO_CARD'")
+    
+    # Add IRR to currency enum
+    op.execute("ALTER TYPE currency ADD VALUE IF NOT EXISTS 'IRR'")
+    
     # Add receipt image and approval fields for card-to-card payments
     op.add_column(
         "transactions",
