@@ -99,6 +99,7 @@ btn-dashboard =
     .remnashop = 🛍 RemnaShop
     .transactions = 🧾 Транзакции
     .pending-payments = 💳 Ожидающие платежи ({ $count })
+    .importer = 📥 Импорт пользователей
 
 btn-card-to-card =
     .upload-receipt = 📤 Загрузить чек
@@ -106,7 +107,6 @@ btn-card-to-card =
     .reject-payment = ❌ Отклонить платёж
     .view-receipt = 🖼 Просмотреть чек
     .add-notes = 📝 Добавить примечания
-    .importer = 📥 Импорт пользователей
 
 btn-statistics =
     .users = 👥 Пользователи
