@@ -21,6 +21,7 @@ DEFAULT_DURATION_PRICES: Final[dict[Currency, Decimal]] = {
     Currency.USD: Decimal("1"),
     Currency.XTR: Decimal("60"),
     Currency.RUB: Decimal("100"),
+    Currency.IRR: Decimal("50000"),  # Iranian Toman (50,000 IRR ≈ $1 USD)
 }
 
 DOMAIN_REGEX: Pattern[str] = re.compile(r"^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$")

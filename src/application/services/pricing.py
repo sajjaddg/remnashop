@@ -110,7 +110,7 @@ class PricingService:
         logger.debug(f"Applying currency rules for amount '{amount}' and currency '{currency}'")
 
         match currency:
-            case Currency.XTR | Currency.RUB:
+            case Currency.XTR | Currency.RUB | Currency.IRR:
                 amount = amount.to_integral_value(rounding=ROUND_DOWN)
                 min_amount = Decimal(1)
             case _:
